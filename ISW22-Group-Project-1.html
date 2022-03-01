@@ -12,7 +12,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="styles.css">
     <style>
         body {
             background-color: #002E58;
@@ -58,6 +57,7 @@
             padding-right: 7%;
             border-radius: 30px;
         }
+
         .formText{
             text-align: center;
         }
@@ -66,6 +66,10 @@
 </head>
 
 <body onload="focus201()">
+    <header>
+            <div style="margin-top: 3em">
+            </div>
+    </header>
     <!--Information on the IS program and what is teaches-->
     <div id="isInfo" class="isInfo">
         <h2> Program Overview</h2>
@@ -81,7 +85,8 @@
            </div>
            <br>
     </div>
-
+    <div style="margin-top: 2em">
+    </div>
     <!--This is a block that will display on the right side of the page and contains the calculator for IS acceptance-->
     <div id="isApply" class="isInfo">
         <div class="formText">
@@ -214,7 +219,7 @@
 
             <br><br>
 
-            <input type="submit" id="calculateChances" value="Calculate">
+            <input type="button" id="calculateChances" value="Calculate" onclick="calcGPA()">
 
             <br><br>
 
@@ -233,7 +238,7 @@
     </div>
 </body>
 <footer>
-    <div style="margin-top: 1000px">
+    <div style="margin-top: 5em">
     </div>
 </footer>
 

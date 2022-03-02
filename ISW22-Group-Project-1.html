@@ -88,13 +88,14 @@
     <div style="margin-top: 2em">
     </div>
     <!--This is a block that will display on the right side of the page and contains the calculator for IS acceptance-->
-    <div id="isApply" class="isInfo">
+    <div id="isApply" class="isInfo" onload="focus201()">
         <div class="formText">
         <!--The Main form for the HTML with dropdowns-->
         <form id="myForm" name="myForm" onsubmit="calculateChances()">
             <h3>What Are My Chances of Getting in to the <a href="https://marriottschool.byu.edu/infosys/">Information Systems Program</a> at BYU?</h3>
             <h4>Enter the Following Information to Find Out!</h4>
             <h4>Please enter the grades for the following classes, <br> and indicate if the class was a retake by checking the box.</h4>
+            <p id="error" style="color: red"></p>
             <label for="is201">IS201:</label>
             <select name="is201" id="is201"> 
                 <option value="blank"></option>
@@ -255,49 +256,54 @@
     function clearCircle() {
         //Calls the focus function when reset
         focus201();
-
-        //This function clears the circle 
-        document.getElementById("myCircle").style.display = "none";
-        document.getElementById("myCircle").style.fill = "none";
-
-        //clears the output GPA
-        document.getElementById("calculatedGPA").innerHTML = "";
-
-        //the overall GPA
-        document.getElementById("totalGPA").value = null;
-
-        //the last 30 credit hours of GPA
-        document.getElementById("recentGPA").value = null;
-
-        //all drop down menus and checkboxes
-        document.getElementById("is201").select("blank");
-        document.getElementById("is201c").checked = false;
-
-        document.getElementById("is303").select("blank");
-        document.getElementById("is303c").checked = false;
-
-        document.getElementById("acc200").select("blank");
-        document.getElementById("acc200c").checked = false;
-
-        document.getElementById("fin201").select("blank");
-        document.getElementById("fin201c").checked = false;
-
-        document.getElementById("mktg201").select("blank");
-        document.getElementById("mktgc").checked = false;
     }
     function calcGPA() {
+        let iGPA = 3.4;
         //This function calculates the gpa using the following info
         //IS 201 is worth 20%
         //IS 303 or CS142 is worth 20%
         //ACC 200, FIN 201, and MKTG 201 combined are worth 20%
         //The overall GPA is worth 20%
         //The last 30 GPA credits is worth 20%
-        //Then if the GPA is 3.7 or above, display a green circle.
-        //If the GPA is 3.4 and above but less than 3.7, display a yellow circle.
-        //Otherwise display a red circle.
 
         //check that all boxes are filled
-
+        if (checkIfFilled()){
+            //Then if the GPA is 3.7 or above, display a green circle.
+            if (iGPA >= 3.7){
+                circleGreen();
+            } else if (iGPA < 3.7 && iGPA >= 3.4){ //If the GPA is 3.4 and  above but less than 3.7, display a yellow circle.
+                circleYellow();
+            }  else{   //Otherwise display a red circle.
+                circleRed();
+            }
+            document.getElementById("calculatedGPA").innerHTML = `Your GPA is ${iGPA}`;
+        } else {
+            document.getElementById("error").innerHTML = `Please fill all fields`;
+        }
+    }
+    function checkIfFilled(){
+        //check that all fields have been filled.
+        if ((document.getElementById("is201").value != 'blank') && (document.getElementById("is303").value != 'blank') && (document.getElementById("acc200").value != 'blank') && (document.getElementById("fin201").value != 'blank') && (document.getElementById("mktg201").value != 'blank') &&
+        (document.getElementById("totalGpa").value != "") && (document.getElementById("recentGpa").value != "")){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function circleGreen(){
+        //Change circle color green
+        document.getElementById("myCircle").style.display = "block";                                         
+        document.getElementById("myCircle").style.fill = "green";
+    }
+    function circleYellow(){
+        //Change circle color yellow
+        document.getElementById("myCircle").style.display = "block";                                         
+        document.getElementById("myCircle").style.fill = "yellow";        
+    }
+    function circleRed(){
+        //Change circle color Red
+        document.getElementById("myCircle").style.display = "block";                                         
+        document.getElementById("myCircle").style.fill = "red";
     }
     function round(value, decimals) {
         //function that rounds variables

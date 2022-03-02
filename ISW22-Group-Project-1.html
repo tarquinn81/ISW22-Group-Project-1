@@ -244,10 +244,6 @@
 </footer>
 
 <script>
-    //Change circle color
-    document.getElementById("myCircle").style.display = "block";                                         
-    document.getElementById("myCircle").style.fill = "green";
-
     //Focus on the IS201 dropdown
     function focus201() {
         document.getElementById("is201").focus();
@@ -256,9 +252,15 @@
     function clearCircle() {
         //Calls the focus function when reset
         focus201();
+
+        //erase circle and calculated gpa
+        document.getElementById("myCircle").style.display = "none";  
+        document.getElementById("calculatedGPA").innerHTML = '';
+
+        //remove any error messages
+        document.getElementById("error").innerHTML = ``;
     }
     function calcGPA() {
-        let iGPA = 3.4;
         //This function calculates the gpa using the following info
         //IS 201 is worth 20%
         //IS 303 or CS142 is worth 20%
@@ -266,17 +268,19 @@
         //The overall GPA is worth 20%
         //The last 30 GPA credits is worth 20%
 
+        let iGPA = 3.4;
+        
         //check that all boxes are filled
         if (checkIfFilled()){
             //Then if the GPA is 3.7 or above, display a green circle.
             if (iGPA >= 3.7){
                 circleGreen();
-            } else if (iGPA < 3.7 && iGPA >= 3.4){ //If the GPA is 3.4 and  above but less than 3.7, display a yellow circle.
+            } else if (iGPA < 3.7 && iGPA >= 3.4){ //If the GPA is 3.4 and above but less than 3.7, display a yellow circle.
                 circleYellow();
             }  else{   //Otherwise display a red circle.
                 circleRed();
             }
-            document.getElementById("error").innerHTML = ``
+            document.getElementById("error").innerHTML = ``;
             document.getElementById("calculatedGPA").innerHTML = `Your GPA is ${iGPA}`;
         } else {
             document.getElementById("error").innerHTML = `Please fill all fields`;

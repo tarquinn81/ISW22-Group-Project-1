@@ -95,7 +95,6 @@
             <h3>What Are My Chances of Getting in to the <a href="https://marriottschool.byu.edu/infosys/">Information Systems Program</a> at BYU?</h3>
             <h4>Enter the Following Information to Find Out!</h4>
             <h4>Please enter the grades for the following classes, <br> and indicate if the class was a retake by checking the box.</h4>
-            <p id="error" style="color: red"></p>
             <label for="is201">IS201:</label>
             <select name="is201" id="is201"> 
                 <option value="blank"></option>
@@ -254,11 +253,9 @@
         focus201();
 
         //erase circle and calculated gpa
-        document.getElementById("myCircle").style.display = "none";  
+        document.getElementById("myCircle").style.display = "none"; 
+        document.getElementById("myCircle").style.fill = "none"; 
         document.getElementById("calculatedGPA").innerHTML = '';
-
-        //remove any error messages
-        document.getElementById("error").innerHTML = ``;
     }
     function calcGPA() {
         //This function calculates the gpa using the following info
@@ -280,10 +277,10 @@
             }  else{   //Otherwise display a red circle.
                 circleRed();
             }
-            document.getElementById("error").innerHTML = ``;
             document.getElementById("calculatedGPA").innerHTML = `Your GPA is ${iGPA}`;
         } else {
-            document.getElementById("error").innerHTML = `Please fill all fields`;
+            alert(`You must select an item in each drop down and enter a value in the GPA text boxes!`);
+            focus201();
         }
     }
     function checkIfFilled(){

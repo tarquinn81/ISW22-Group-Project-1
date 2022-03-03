@@ -233,7 +233,7 @@
                 <p id="calculatedGPA"></p>
             </div>
         </form>
-        <p>Results do not guarentee admission</p>
+        <p>Results do not guarantee admission</p>
         </div>
     </div>
 </body>
@@ -264,9 +264,21 @@
         //ACC 200, FIN 201, and MKTG 201 combined are worth 20%
         //The overall GPA is worth 20%
         //The last 30 GPA credits is worth 20%
-
-        let iGPA = 3.4;
         
+        //grab all values from boxes
+        let iIs201Gpa = getGPA('is201');
+        let iIs303Gpa = getGPA('is303');
+        let iAcc200Gpa = getGPA('acc200');
+        let iFin201Gpa = getGPA('fin201');
+        let iMktg201Gpa = getGPA('mktg201');
+        let iTotalGpa = document.getElementById('totalGpa').value;
+        let iRecentGpa = document.getElementById('recentGpa').value;
+
+        console.log(iTotalGpa + iRecentGpa);
+
+        //calculate gpa
+        let iGPA;
+
         //check that all boxes are filled
         if (checkIfFilled()){
             //Then if the GPA is 3.7 or above, display a green circle.
@@ -282,6 +294,30 @@
             alert(`You must select an item in each drop down and enter a value in the GPA text boxes!`);
             focus201();
         }
+    }
+
+    function getGPA(sId){
+        /*A = 4
+        A- = 3.7
+        B+ = 3.4
+        B = 3
+        B- = 2.7
+        C+ = 2.4
+        C = 2
+        C- = 1.7
+        D+ = 1.4
+        D = 1
+        D- = .7
+        E = 0 */
+        //this function grabs the selected value and finds the corresponding gpa value.
+        let aGpaValue = [4, 3.7, 3.4, 3, 2.7, 2.4, 2, 1.7, 1.4, 1, .7, 0];
+        let sIdcheck = `${sId}c`;
+        let sLetterGrade = document.getElementById(sId).selectedIndex - 1;
+        if (document.getElementById(sIdcheck).checked) {
+            sLetterGrade++;
+        }
+        return aGpaValue[sLetterGrade];
+
     }
     function checkIfFilled(){
         //check that all fields have been filled.

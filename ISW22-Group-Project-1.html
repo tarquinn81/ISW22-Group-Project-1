@@ -277,12 +277,8 @@
         //calculate gpa
         let iGPA;
 
-
-
-
-
-
-        
+        iGPA = (iIs201Gpa * .2) + (iIs303Gpa * .2) + (((iAcc200Gpa + iFin201Gpa + iMktg201Gpa)/3) * .2) + (iTotalGpa * .2) + (iRecentGpa * .2);
+        iGPA = round(iGPA, 2);
 
         //check that all boxes are filled
         if (checkIfFilled()){
